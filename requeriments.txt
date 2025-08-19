@@ -1,0 +1,5 @@
+### requirements.txt inicial
+pandas
+plotly
+dash
+jupyter
