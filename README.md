@@ -22,7 +22,7 @@ This project analyzes open data from Buenos Aires City's subway system and build
 
 ## 🚀 Getting Started
 ```bash
-git clone https://github.com/yourusername/subte-dashboard.git
+git clone https://github.com/dochronos/subte-dashboard.git
 cd subte-dashboard
 python -m venv venv
 source venv/bin/activate   # (Mac/Linux)
