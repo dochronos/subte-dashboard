@@ -1,33 +1,132 @@
-# 🚇 Buenos Aires Subway Dashboard
+# 🚇 Buenos Aires Subway (Subte) — Business Intelligence Dashboard
 
-This project analyzes open data from Buenos Aires City's subway system and builds an **interactive dashboard** to visualize passenger flow, frequency, and usage trends.
+**Goal:** Build an interactive BI dashboard that transforms official open data of the Buenos Aires Subway (Subte) into actionable insights for demand, frequency, and station-level patterns.
 
-## 🔹 Project Objectives
-- Collect and clean official transportation datasets.
-- Build exploratory notebooks with insights.
-- Create an interactive dashboard using **Dash + Plotly**.
-- Present weekly iterations on LinkedIn as part of a professional learning project.
+> This is a professional portfolio project designed to demonstrate data analysis, data modeling, geospatial visualization, and product-thinking. It follows a weekly iteration plan with public updates on LinkedIn.
 
-## 📂 Repository Structure
-- `data/` → Raw and cleaned datasets.
-- `notebooks/` → Jupyter notebooks for exploration.
-- `src/` → Application code (Python/Dash).
-- `requirements.txt` → Dependencies list.
+---
+
+## 🔍 Key Questions
+- Which **lines and stations** have the highest passenger demand?
+- How does **demand evolve over time** (month/season)?
+- How does **service frequency** relate to demand (efficiency proxy)?
+- What **geographical patterns** emerge (stations proximity, corridor usage)?
+
+---
+
+## 🧩 Datasets (Official Open Data — GCBA)
+- **Passengers by station (turnstiles/molinete)** — demand by station & line  
+- **Monthly frequency** — trains dispatched / service frequency  
+- **Stations & entrances (geolocation)** — coordinates for mapping  
+> Source portal: https://data.buenosaires.gob.ar/dataset/?q=subtes
+
+*(Exact dataset links and data dictionaries will be documented in `/data/README_DATASETS.md` after download.)*
+
+---
 
 ## 🛠️ Tech Stack
-- Python 3.11+
-- Pandas
-- Plotly / Dash
-- Jupyter
+- **Python 3.11+**, **Pandas**
+- **Plotly + Dash** (interactive app) / *(Tableau or Power BI optional for comparison screenshots)*
+- **Jupyter Notebooks** (exploration & EDA)
 
-## 🚀 Getting Started
+---
+
+## 📂 Repository Structure
+subte-dashboard/
+│── assets/
+│ └── screenshots/
+│── data/ # raw/ and processed/ will live here
+│ └── README_DATASETS.md # source links, schema, refresh policy
+│── notebooks/ # EDA, experiments, drafts
+│ └── 01_exploration.ipynb
+│── src/
+│ ├── app.py # Dash entry point (MVP dashboard)
+│ └── utils/ # helpers (loading, cleaning, mapping)
+│── requirements.txt
+│── README.md
+
+---
+
+## 🚀 Getting Started (Local)
 ```bash
 git clone https://github.com/dochronos/subte-dashboard.git
 cd subte-dashboard
+
+# Create and activate venv
 python -m venv venv
-source venv/bin/activate   # (Mac/Linux)
-venv\Scripts\activate      # (Windows)
+# Mac/Linux
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
+
+# Install deps
 pip install -r requirements.txt
+
+# Run Dash app
+python src/app.py
+# App will run at http://127.0.0.1:8050
+
+🗺️ MVP Dashboard (Week 2 target)
+
+Page 1 — Demand Overview
+
+Top stations by passengers
+
+Demand by line (A, B, C, D, E, H)
+
+Monthly trend chart
+
+Page 2 — Geomap
+
+Stations & entrances (tooltip: station, line, demand)
+
+📅 Iteration Plan (Build-in-Public)
+
+Week 1 — Setup & Data
+
+Download datasets, document sources (/data/README_DATASETS.md)
+
+First EDA notebook
+
+Minimal Dash app skeleton (runs locally)
+
+Week 2 — Demand & Trends
+
+Cleaned demand dataset (station/line/month)
+
+Visuals: top stations, demand by line, trend
+
+Week 3 — Geospatial
+
+Join with station geolocation
+
+Interactive map in Dash (tooltips & filters)
+
+Week 4 — Frequency & KPI
+
+Integrate frequency dataset
+
+KPI: passengers per dispatched train (proxy)
+
+Final polish (layout, filters, README update, screenshots)
+
+🧪 Data Quality & Refresh
+
+Version datasets in /data/raw and /data/processed
+
+Track refresh policy and caveats in README_DATASETS.md
+
+📸 Screenshots (to be added)
+
+/assets/screenshots/ — add key views
+
+🔗 LinkedIn Updates
+
+Weekly posts summarizing progress, insights, visuals, and tech decisions.
+
+📜 License
+
+Open for educational and portfolio purposes. Data © Gobierno de la Ciudad de Buenos Aires (per their open-data license).
 
 ## 📌 Notes
 

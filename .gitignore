@@ -1,0 +1,27 @@
+# ----------------------
+# Python / Jupyter
+# ----------------------
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# ----------------------
+# Data (keep raw, ignore processed/interim)
+# ----------------------
+# Raw datasets are versioned (DO NOT ignore data/raw/)
+data/processed/
+data/interim/
+
+# ----------------------
+# Assets (ignore heavy screenshots/renders)
+# ----------------------
+assets/screenshots/
+
+# ----------------------
+# OS / Editor
+# ----------------------
+.DS_Store
+Thumbs.db
+*.code-workspace
