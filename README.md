@@ -47,6 +47,15 @@ subte-dashboard/
 
 ---
 
+## 📸 Screenshots & LinkedIn Updates
+
+- **Week 1**  
+  Initial EDA — passengers by line (sample of 3 CSVs).  
+  ![Week 1 preview](assets/screenshots/week1_preview.png)  
+  👉 [LinkedIn Post](https://www.linkedin.com/posts/hermanschubert_dataanalytics-businessintelligence-python-activity-7365832932294381569-go3H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAggMogBjBE17nitimWMiApsgdQkRtJey-M)
+
+---
+
 ## 🚀 Getting Started (Local)
 ```bash
 git clone https://github.com/dochronos/subte-dashboard.git

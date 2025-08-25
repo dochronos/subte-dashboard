@@ -15,11 +15,6 @@ data/processed/
 data/interim/
 
 # ----------------------
-# Assets (ignore heavy screenshots/renders)
-# ----------------------
-assets/screenshots/
-
-# ----------------------
 # OS / Editor
 # ----------------------
 .DS_Store
