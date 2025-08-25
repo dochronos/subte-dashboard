@@ -54,6 +54,14 @@ subte-dashboard/
   ![Week 1 preview](assets/screenshots/week1_preview.png)  
   👉 [LinkedIn Post](https://www.linkedin.com/posts/hermanschubert_dataanalytics-businessintelligence-python-activity-7365832932294381569-go3H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAggMogBjBE17nitimWMiApsgdQkRtJey-M)
 
+- **Week 2**  
+  Demand by line & monthly trends (coming soon...)  
+
+- **Week 3**  
+  Geospatial map with stations (coming soon...)  
+
+- **Week 4**  
+  KPI integration & final polish (coming soon...)
 ---
 
 ## 🚀 Getting Started (Local)
