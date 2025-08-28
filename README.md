@@ -54,8 +54,24 @@ subte-dashboard/
   ![Week 1 preview](assets/screenshots/week1_preview.png)  
   👉 [LinkedIn Post](https://www.linkedin.com/posts/hermanschubert_dataanalytics-businessintelligence-python-activity-7365832932294381569-go3H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAggMogBjBE17nitimWMiApsgdQkRtJey-M)
 
-- **Week 2**  
-  Demand by line & monthly trends (coming soon...)  
+---
+
+## 📊 Week 2 — Demand & Trends
+
+✅ Cleaned + normalized full 2024 dataset (11.4M rows)  
+✅ Aggregations by subway line and by month  
+✅ First visualizations exported with Kaleido  
+
+### Key Outputs
+- **Total Passengers by Line (2024)**  
+  ![bar_passengers_by_line](assets/screenshots/bar_passengers_by_line.png)
+
+- **Monthly Demand by Line (2024)**  
+  ![line_trend_by_line](assets/screenshots/line_trend_by_line.png)
+
+---
+
+
 
 - **Week 3**  
   Geospatial map with stations (coming soon...)  
