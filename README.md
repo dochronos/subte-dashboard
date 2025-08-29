@@ -69,12 +69,23 @@ subte-dashboard/
 - **Monthly Demand by Line (2024)**  
   ![line_trend_by_line](assets/screenshots/line_trend_by_line.png)
 
----
+## 📍 Week 3 — Geospatial Integration
 
+This week we connect demand data with subway station locations to produce interactive maps.
 
+### Goals
+- Load official dataset of **subway entrances ("bocas de subte")**
+- Normalize coordinates and station names
+- Join with demand dataset (`mol_full`)
+- First **interactive geospatial map** with Plotly (scatter_geo)
+- Save map preview for recruiters (`/assets/screenshots/`)
 
-- **Week 3**  
-  Geospatial map with stations (coming soon...)  
+### Progress Checklist
+- [x] Notebook `03_geospatial.ipynb` created  
+- [ ] Dataset integrated and cleaned  
+- [ ] Stations visualized on interactive map  
+- [ ] Screenshot saved in `/assets/screenshots/`  
+- [ ] README updated with visuals  
 
 - **Week 4**  
   KPI integration & final polish (coming soon...)
