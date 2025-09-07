@@ -69,23 +69,29 @@ subte-dashboard/
 - **Monthly Demand by Line (2024)**  
   ![line_trend_by_line](assets/screenshots/line_trend_by_line.png)
 
-## 📍 Week 3 — Geospatial Integration
+---
 
-This week we connect demand data with subway station locations to produce interactive maps.
+## 📍 Week 3 — Geospatial Join (Stations + Demand)
 
-### Goals
-- Load official dataset of **subway entrances ("bocas de subte")**
-- Normalize coordinates and station names
-- Join with demand dataset (`mol_full`)
-- First **interactive geospatial map** with Plotly (scatter_geo)
-- Save map preview for recruiters (`/assets/screenshots/`)
+✅ Clean join between **station entrances** (bocas) and **2024 turnstile demand**  
+✅ 100% station–line match after alias normalization (pair-specific overrides for tricky cases)  
+✅ Map + CSV exports generated for dashboard and recruiters  
 
-### Progress Checklist
-- [x] Notebook `03_geospatial.ipynb` created  
-- [ ] Dataset integrated and cleaned  
-- [ ] Stations visualized on interactive map  
-- [ ] Screenshot saved in `/assets/screenshots/`  
-- [ ] README updated with visuals  
+### Key Outputs
+- **BA Subway — Demand by Station (2024)**  
+  ![week3_map](assets/screenshots/week3_map.png)
+
+### Files Produced
+- `data/processed/stations_with_demand_2024.csv`  
+- `data/processed/map_stations_demand_2024.png`  
+- `assets/screenshots/week3_map.png` (for README/LinkedIn)  
+
+**Tech notes**  
+- Robust CSV loader with multi-encoding fallback (`utf-8-sig`, `utf-8`, `latin1`, `cp1252`)  
+- Column normalization + alias strategy (global + pair-wise mapping)  
+- Plotly/Mapbox (OpenStreetMap tiles) for reproducible maps  
+
+---
 
 - **Week 4**  
   KPI integration & final polish (coming soon...)
