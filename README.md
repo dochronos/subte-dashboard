@@ -93,8 +93,28 @@ subte-dashboard/
 
 ---
 
-- **Week 4**  
-  KPI integration & final polish (coming soon...)
+## 📈 Week 4 — Frequency & KPI (Pax / Train)
+
+This week we integrated **service frequency** (trains dispatched) to create a simple efficiency proxy:  
+**KPI = Passengers / Dispatched Train** (by line & by month, 2024).
+
+**What we did**
+- Normalized monthly frequency from *Formaciones Despachadas 2024*.
+- Rebuilt passengers trend (2024) robustly from turnstiles if not cached.
+- Created KPI snapshots per line and a monthly trend.
+- Exported ready-to-share **CSVs** and **PNGs**.
+
+**Key outputs**
+- `data/processed/kpi_pax_per_train_2024_by_line.csv`
+- `data/processed/kpi_pax_per_train_2024_trend.csv`
+
+**Visuals**
+- KPI by Line (2024)  
+  ![Week 4 — KPI by Line](assets/screenshots/week4_kpi_by_line.png)
+
+- Monthly KPI Trend (2024)  
+  ![Week 4 — KPI Trend](assets/screenshots/week4_kpi_trend.png)
+
 ---
 
 ## 🚀 Getting Started (Local)
