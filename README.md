@@ -117,6 +117,37 @@ This week we integrated **service frequency** (trains dispatched) to create a si
 
 ---
 
+### Week 5 — Data Quality Checks
+
+- Added a robust multi-CSV loader (24 files, 11.44M rows for 2024).
+- Sanity checks:
+  - **Nulls** in `passengers`
+  - **Negative values**
+  - **Per-line extreme outliers** (above the 99.9th percentile)
+  - **Duplicates** on (`station`, `line`, `date`)
+- Exported anomalies to: `data/processed/quality_flags.csv`
+- Distribution chart (boxplot, 15-min intervals) saved to:
+  `assets/screenshots/week5_quality.png`
+
+**Dataset scope (2024):**
+- Date range: 2024-01-01 → 2024-12-31  
+- Unique lines: 6  
+- Unique stations: 97  
+- Rows: 11,440,440  
+
+**Coverage checks (monthly):**
+- Low-coverage detection per (`station`, `line`, `month`)
+- Reports saved to:  
+  - `data/processed/quality_coverage_monthly.csv`  
+  - `data/processed/quality_coverage_worst_cases.csv`  
+- Heatmap saved to: `assets/screenshots/week5_quality.png`
+
+_Screenshots:_  
+![Week 5 — Distribution by Line](assets/screenshots/week5_quality.png)  
+![Week 5 — Coverage Heatmap](assets/screenshots/week5_coverage.png)
+
+---
+
 ## 🚀 Getting Started (Local)
 ```bash
 git clone https://github.com/dochronos/subte-dashboard.git
