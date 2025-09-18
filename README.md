@@ -64,10 +64,10 @@ subte-dashboard/
 
 ### Key Outputs
 - **Total Passengers by Line (2024)**  
-  ![bar_passengers_by_line](assets/screenshots/bar_passengers_by_line.png)
+  ![bar_passengers_by_line](assets/screenshots/week2_demand_by_line.png)
 
 - **Monthly Demand by Line (2024)**  
-  ![line_trend_by_line](assets/screenshots/line_trend_by_line.png)
+  ![line_trend_by_line](assets/screenshots/week2_trend_by_month.png)
 
 ---
 
