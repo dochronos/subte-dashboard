@@ -148,6 +148,14 @@ _Screenshots:_
 
 ---
 
+## 📊 Dash App — Subte Dashboard
+
+Además de los notebooks semanales, este repositorio incluye una aplicación interactiva construida en **Dash** con páginas múltiples (Overview, Geospatial, KPIs).
+
+👉 [Instrucciones para levantar la app](app/README.md)
+
+---
+
 ## 🚀 Getting Started (Local)
 ```bash
 git clone https://github.com/dochronos/subte-dashboard.git
