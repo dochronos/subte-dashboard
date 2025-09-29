@@ -148,11 +148,32 @@ _Screenshots:_
 
 ---
 
+### Week 6 — Dash MVP (Overview, Geospatial & KPIs)
+
+- **Dash app** with three pages: Overview, Geospatial, and KPIs.
+- **Overview:** total demand and monthly trends by line (2024).
+- **Geospatial:** station map with 2024 passenger totals (via `stations_geo.csv`).
+- **KPIs:** *Passengers per dispatched train* using `formaciones_2024`.
+
+**Reproducible scripts (`/scripts`):**
+- `generate_stations_geo.py` — build `data/processed/stations_geo.csv` from the raw “bocas/estaciones” file.
+- `build_formaciones_from_freq.py` — derive `formaciones_2024.(csv|parquet)` from `freq_from_form_2024.csv`.
+- `generate_formations_2024.py` — generic converter for raw formations (kept for future updates).
+- `make_week6_screenshots.py` — exports the images used below.
+
+**Screenshots:**
+![Week 6 — Overview (Monthly)](assets/screenshots/week6_overview_line.png)  
+![Week 6 — Geospatial map](assets/screenshots/week6_map.png)  
+![Week 6 — KPI (by line)](assets/screenshots/week6_kpi_bar.png)  
+![Week 6 — KPI (trend)](assets/screenshots/week6_kpi_trend.png)
+
+---
+
 ## 📊 Dash App — Subte Dashboard
 
-Además de los notebooks semanales, este repositorio incluye una aplicación interactiva construida en **Dash** con páginas múltiples (Overview, Geospatial, KPIs).
+In addition to the weekly notebooks, this repository includes an interactive application built with Dash, featuring multiple pages (Overview, Geospatial, KPIs).
 
-👉 [Instrucciones para levantar la app](app/README.md)
+👉 [Instructions to launch the app](app/README.md)
 
 ---
 
