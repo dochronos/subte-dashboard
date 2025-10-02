@@ -169,6 +169,20 @@ _Screenshots:_
 
 ---
 
+### Week 7 — Formations ETL & KPIs
+
+- Ingested and normalized the official 2024 *dispatched formations* (.xlsx → `data/processed/formaciones_2024.(csv|parquet)`).
+- Updated Dash KPI **Passengers per dispatched train** to use the official source (with a resilient fallback).
+- Added two visuals:
+  - **By line** (2024 aggregate): `assets/screenshots/week7_kpi_pax_per_train_by_line.png`
+  - **Monthly trend** (all lines): `assets/screenshots/week7_kpi_pax_per_train_trend.png`
+
+**Notes:**
+- Premetro (*LineaP*) is currently excluded from KPIs to keep comparability across subway lines (will be integrated in a future sprint).
+- All assets are centralized under `assets/screenshots/` to avoid duplicated paths under notebooks.
+
+---
+
 ## 📊 Dash App — Subte Dashboard
 
 In addition to the weekly notebooks, this repository includes an interactive application built with Dash, featuring multiple pages (Overview, Geospatial, KPIs).

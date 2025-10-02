@@ -20,3 +20,7 @@ data/interim/
 .DS_Store
 Thumbs.db
 *.code-workspace
+
+# prevent stray assets under notebooks
+notebooks/assets/
+notebooks/**/assets/

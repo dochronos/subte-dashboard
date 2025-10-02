@@ -207,47 +207,126 @@ def load_stations_geo() -> pd.DataFrame:
     return out
 
 
-def load_formations() -> pd.DataFrame | None:
+def load_formations(prefer_official: bool = True) -> pd.DataFrame | None:
     """
-    Load dispatched formations (trains) per day & line.
-    Expected columns: date, line, trains
-    Looks in data/processed for formaciones_2024.(parquet|csv).
-    Returns None if not present.
+    Load formations/dispatched-trains for 2024.
+
+    Order of preference (when prefer_official=True):
+      1) data/processed/formaciones_2024.parquet
+      2) data/processed/formaciones_2024.csv
+      3) Fallbacks (older derived files, if present):
+         - data/processed/kpi_pax_per_train_2024_trend.csv (expects [date,line,trains])
+         - data/processed/kpi_pax_per_train_2024_by_line.csv (monthly; we upcast to daily 1st of month)
+         - data/processed/freq_from_form_2024.csv (expects [year_month,line,dispatched_trains])
+
+    Returns a dataframe with columns: ['date','line','trains']
+    or None if nothing could be loaded.
     """
-    pq = PROCESSED / "formaciones_2024.parquet"
-    csv = PROCESSED / "formaciones_2024.csv"
+    # --- Candidates in priority order ---
+    candidates = []
+    if prefer_official:
+        candidates.extend([
+            PROCESSED / "formaciones_2024.parquet",
+            PROCESSED / "formaciones_2024.csv",
+        ])
+    # Fallbacks (older/derived)
+    candidates.extend([
+        PROCESSED / "kpi_pax_per_train_2024_trend.csv",
+        PROCESSED / "kpi_pax_per_train_2024_by_line.csv",
+        PROCESSED / "freq_from_form_2024.csv",
+    ])
 
-    if pq.exists():
-        df = pd.read_parquet(pq)
-    elif csv.exists():
-        df = pd.read_csv(csv)
-    else:
-        return None
+    def _normalize_line(v: str) -> str:
+        if pd.isna(v):
+            return np.nan
+        s = str(v).strip().replace(" ", "")
+        s = s.replace("Línea", "Linea").replace("línea", "Linea")
+        if s.lower().startswith("linea"):
+            return s
+        if len(s) == 1 and s.isalpha():
+            return f"Linea{s.upper()}"
+        return s
 
-    # Normalize columns
-    df.columns = [c.strip().lower() for c in df.columns]
-    need_any = {"date", "line", "trains"}
-    if not need_any.issubset(df.columns):
-        # Try alternative common names
-        cols_map = {c: c for c in df.columns}
-        date_col = _pick(set(df.columns), ["date", "fecha", "dia"])
-        line_col = _pick(set(df.columns), ["line", "linea", "linea_nombre", "linea_id"])
-        trains_col = _pick(set(df.columns), ["trains", "formaciones", "trenes", "despachos", "freq"])
-        if not all([date_col, line_col, trains_col]):
-            raise ValueError(
-                f"Formations dataset missing columns. Found: {sorted(df.columns)}. "
-                f"Need at least (date,line,trains)."
-            )
-        df = df.rename(columns={date_col: "date", line_col: "line", trains_col: "trains"})
+    def _finish(df: pd.DataFrame) -> pd.DataFrame:
+        # Standardize schema & types
+        df = df[["date", "line", "trains"]].copy()
+        df["date"] = pd.to_datetime(df["date"], errors="coerce")
+        df["line"] = df["line"].apply(_normalize_line)
+        df["trains"] = pd.to_numeric(df["trains"], errors="coerce")
+        # Keep 2024 only and drop NA
+        df = df.dropna(subset=["date", "line", "trains"])
+        df = df[df["date"].dt.year == 2024]
+        # Aggregate in case there are duplicates
+        df = df.groupby(["date", "line"], as_index=False)["trains"].sum()
+        df["trains"] = df["trains"].astype("Int64")
+        return df
 
-    # Dtypes
-    df["date"] = pd.to_datetime(df["date"], errors="coerce", utc=False)
-    df["line"] = _norm_line(df["line"])
-    df["trains"] = pd.to_numeric(df["trains"], errors="coerce").astype("Float64")
+    for p in candidates:
+        if not p.exists():
+            continue
+        try:
+            # OFFICIAL direct schema (CSV/Parquet)
+            if p.name.startswith("formaciones_2024") and p.suffix == ".parquet":
+                df = pd.read_parquet(p)
+                return _finish(df)
+            if p.name.startswith("formaciones_2024") and p.suffix == ".csv":
+                df = pd.read_csv(p, parse_dates=["date"])
+                return _finish(df)
 
-    # Keep 2024 only
-    df = df[(df["date"] >= "2024-01-01") & (df["date"] < "2025-01-01")].copy()
+            # Trend fallback: expects daily schema already
+            if p.name == "kpi_pax_per_train_2024_trend.csv":
+                df = pd.read_csv(p, parse_dates=["date"])
+                # Some versions had 'pax_per_train', some 'trains'—we need trains
+                if "trains" not in df.columns:
+                    # If only ratios present, we can't reconstruct trains here
+                    # so skip this candidate.
+                    continue
+                df = df.rename(columns={"trains": "trains", "line": "line", "date": "date"})
+                return _finish(df)
 
-    # Clean NaNs
-    df = df.dropna(subset=["date", "line", "trains"])
-    return df
+            # By-line monthly fallback: upcast monthly → daily at first-of-month
+            if p.name == "kpi_pax_per_train_2024_by_line.csv":
+                dfm = pd.read_csv(p)
+                # Try to find date-ish column
+                date_col = None
+                for c in dfm.columns:
+                    c2 = str(c).lower()
+                    if "year_month" in c2 or c2 in ("ym", "month") or "date" in c2:
+                        date_col = c
+                        break
+                if date_col is None or "line" not in dfm.columns:
+                    continue
+                # Build daily at first of month
+                s = pd.to_datetime(dfm[date_col].astype(str), errors="coerce")
+                if s.dt.day.isna().any():
+                    # If it's period-like "2024-01", coerce day=1
+                    s = pd.to_datetime(dfm[date_col].astype(str) + "-01", errors="coerce")
+                dfm = dfm.assign(date=s)
+                # Need trains total; if only ratios exist, skip
+                if "trains" not in dfm.columns:
+                    continue
+                dfm = dfm.rename(columns={"trains": "trains"})
+                dfm = dfm[["date", "line", "trains"]]
+                return _finish(dfm)
+
+            # freq_from_form fallback (monthly totals)
+            if p.name == "freq_from_form_2024.csv":
+                dfm = pd.read_csv(p)
+                cols = [c.lower() for c in dfm.columns]
+                dfm.columns = cols
+                if "year_month" in cols and "line" in cols and ("dispatched_trains" in cols or "trains" in cols):
+                    tcol = "dispatched_trains" if "dispatched_trains" in cols else "trains"
+                    s = pd.to_datetime(dfm["year_month"].astype(str) + "-01", errors="coerce")
+                    dfm = pd.DataFrame({
+                        "date": s,
+                        "line": dfm["line"],
+                        "trains": pd.to_numeric(dfm[tcol], errors="coerce")
+                    })
+                    return _finish(dfm)
+                # otherwise skip
+
+        except Exception:
+            # try next candidate
+            continue
+
+    return None  # nothing worked
