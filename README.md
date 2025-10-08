@@ -183,6 +183,19 @@ _Screenshots:_
 
 ---
 
+### 🗓️ Week 8 – Service Schedule & Headway Analysis
+
+In this sprint, the dataset `frecuencia_subte.xlsx` was processed to estimate the **average headway per line** and derive the **scheduled number of trains per month**.  
+A new dataset `headway_to_schedule_2024.csv` was created, now integrated into the processed data pipeline.
+
+**Key deliverables:**
+- ETL notebook: `notebooks/08_schedule_etl.ipynb`
+- Processed dataset: `data/processed/headway_to_schedule_2024.csv`
+- New loader in `utils.py`: `load_schedule()`
+- Visual summaries saved under `assets/screenshots/week8_schedule_*.png`
+
+---
+
 ## 📊 Dash App — Subte Dashboard
 
 In addition to the weekly notebooks, this repository includes an interactive application built with Dash, featuring multiple pages (Overview, Geospatial, KPIs).

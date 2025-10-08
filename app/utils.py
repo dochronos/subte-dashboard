@@ -330,3 +330,16 @@ def load_formations(prefer_official: bool = True) -> pd.DataFrame | None:
             continue
 
     return None  # nothing worked
+
+def load_schedule():
+    """Load derived schedule (headway-to-schedule) dataset."""
+    path_csv = PROCESSED / "headway_to_schedule_2024.csv"
+    path_pq  = PROCESSED / "headway_to_schedule_2024.parquet"
+    if path_pq.exists():
+        df = pd.read_parquet(path_pq)
+    elif path_csv.exists():
+        df = pd.read_csv(path_csv)
+    else:
+        raise FileNotFoundError("Schedule dataset not found in data/processed/")
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    return df
