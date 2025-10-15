@@ -210,7 +210,7 @@ In addition to the weekly notebooks, this repository includes an interactive app
 ---
 
 ## 🚀 Getting Started (Local)
-```bash
+
 git clone https://github.com/dochronos/subte-dashboard.git
 cd subte-dashboard
 
@@ -294,7 +294,7 @@ Stay tuned for **Week 1 of Urban Intelligence Lab**, launching next week. 🚀
 
 > 🗃️ **Repository status:**  
 > As of October 2025, this project has been archived to preserve its full analytical cycle.  
-> Active development continues in the unified repository: **[Urban Intelligence Lab](https://github.com/dochronos/urban-intelligence-lab).
+> Active development continues in the unified repository: **[Urban Intelligence Lab](https://github.com/dochronos/urban-intelligence-lab)**.
 
 ---
 
