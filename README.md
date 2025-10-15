@@ -192,8 +192,13 @@ A new dataset `headway_to_schedule_2024.csv` was created, now integrated into th
 - ETL notebook: `notebooks/08_schedule_etl.ipynb`
 - Processed dataset: `data/processed/headway_to_schedule_2024.csv`
 - New loader in `utils.py`: `load_schedule()`
-- Visual summaries saved under `assets/screenshots/week8_schedule_*.png`
+- Visual summaries saved under:
+  - `assets/screenshots/week8_headway_trend.png`
+  - `assets/screenshots/week8_scheduled_by_line.png`
 
+_Screenshots:_  
+![Week 8 — Average Headway per Line (2024)](assets/screenshots/week8_headway_trend.png)  
+![Week 8 — Scheduled Trains by Line (2024)](assets/screenshots/week8_scheduled_by_line.png)
 ---
 
 ## 📊 Dash App — Subte Dashboard
@@ -223,50 +228,6 @@ pip install -r requirements.txt
 python src/app.py
 # App will run at http://127.0.0.1:8050
 
-🗺️ MVP Dashboard (Week 2 target)
-
-Page 1 — Demand Overview
-
-Top stations by passengers
-
-Demand by line (A, B, C, D, E, H)
-
-Monthly trend chart
-
-Page 2 — Geomap
-
-Stations & entrances (tooltip: station, line, demand)
-
-📅 Iteration Plan (Build-in-Public)
-
-Week 1 — Setup & Data
-
-Download datasets, document sources (/data/README_DATASETS.md)
-
-First EDA notebook
-
-Minimal Dash app skeleton (runs locally)
-
-Week 2 — Demand & Trends
-
-Cleaned demand dataset (station/line/month)
-
-Visuals: top stations, demand by line, trend
-
-Week 3 — Geospatial
-
-Join with station geolocation
-
-Interactive map in Dash (tooltips & filters)
-
-Week 4 — Frequency & KPI
-
-Integrate frequency dataset
-
-KPI: passengers per dispatched train (proxy)
-
-Final polish (layout, filters, README update, screenshots)
-
 🧪 Data Quality & Refresh
 
 Version datasets in /data/raw and /data/processed
@@ -280,6 +241,62 @@ Track refresh policy and caveats in README_DATASETS.md
 🔗 LinkedIn Updates
 
 Weekly posts summarizing progress, insights, visuals, and tech decisions.
+
+---
+
+## 🗓️ Development Timeline (Weeks 1–8)
+
+| Week | Focus | Main Deliverables |
+|------|--------|------------------|
+| **Week 1** | Project setup & ETL base | Defined data structure, created initial pipeline to clean open subway data |
+| **Week 2** | KPI generation | Built first operational KPIs per subway line (frequency, service, coverage) |
+| **Week 3** | Dashboard UI | Designed Streamlit dashboard layout and integrated KPI visualizations |
+| **Week 4** | Geo & mapping integration | Linked station coordinates with line routes and added geographic analytics |
+| **Week 5** | Coverage metrics | Generated visual coverage indicators for monthly service distribution |
+| **Week 6** | Data normalization | Improved data structure, consolidated scripts, and automated data generation |
+| **Week 7** | Official formations comparison | Cross-validated internal KPIs with official formation dispatch data (including Premetro) |
+| **Week 8** | Service schedule analysis | Added official headway (frequency) datasets, created schedule-based KPIs and charts |
+
+---
+
+## 📊 Retrospective (Weeks 1–8)
+
+After two months of continuous iteration, **Subte-Dashboard** achieved a full analytical cycle — from data ingestion to visual reporting — using real open data from Buenos Aires’ subway network.
+
+**Key achievements:**
+- Implemented a consistent **ETL pipeline** for raw and processed data.  
+- Built a modular Streamlit dashboard with automated monthly KPI updates.  
+- Integrated **geo-spatial visualizations** for stations and service lines.  
+- Validated data against **official formation dispatch records (SBASE 2024)**.  
+- Added new metrics based on the **service schedule (frequencies & headways)**.  
+
+This stage closes with a mature, production-ready analytical platform capable of visualizing operational insights across multiple data sources.
+
+---
+
+## 🔗 Evolution → Urban Intelligence Lab
+
+Subte-Dashboard now completes its standalone phase.  
+Starting in **August 2025**, this project evolves — together with **AI-Automation Workflow** — into a unified ecosystem:  
+> **Urban Intelligence Lab** — *where Business Intelligence meets AI and Automation.*
+
+In this new phase, the dashboards and ETL models developed here will connect to automated workflows, forming an integrated environment for **urban data intelligence**.
+
+Stay tuned for **Week 1 of Urban Intelligence Lab**, launching next week. 🚀
+
+---
+
+### 📸 Key Visuals
+- `assets/screenshots/week8_headway_trend.png` — Monthly trend of average headways per line  
+- `assets/screenshots/week8_scheduled_by_line.png` — Estimated number of scheduled trains per line
+
+---
+
+> 🗃️ **Repository status:**  
+> As of October 2025, this project has been archived to preserve its full analytical cycle.  
+> Active development continues in the unified repository: **[Urban Intelligence Lab](https://github.com/dochronos/urban-intelligence-lab).
+
+---
 
 📜 License
 
